@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>NCT Agent Network</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+</head>
+
+<body>
+
+  <header class="topbar">
+
+    <div>
+      <h1>NCT Agent Network</h1>
+
+      <p>
+        Réseau de gestion et de collaboration des agents
+      </p>
+    </div>
+
+    <span
+      id="serverBadge"
+      class="badge"
+    >
+      Connexion...
+    </span>
+
+  </header>
+
+
+  <main>
+
+    <!-- AUTHENTIFICATION -->
+
+    <section
+      id="authSection"
+      class="grid"
+    >
+
+      <!-- CONNEXION -->
+
+      <div class="card">
+
+        <h2>Connexion</h2>
+
+        <form id="loginForm">
+
+          <input
+            name="phone"
+            placeholder="Numéro de téléphone"
+            required
+          >
+
+          <input
+            name="password"
+            type="password"
+            placeholder="Mot de passe"
+            required
+          >
+
+          <button type="submit">
+            Se connecter
+          </button>
+
+        </form>
+
+        <p
+          id="loginMessage"
+          class="message"
+        ></p>
+
+      </div>
+
+
+      <!-- INSCRIPTION -->
+
+      <div class="card">
+
+        <h2>Rejoindre le réseau</h2>
+
+        <form id="registerForm">
+
+          <input
+            name="name"
+            placeholder="Nom complet"
+            required
+          >
+
+          <input
+            name="phone"
+            placeholder="Numéro de téléphone"
+            required
+          >
+
+          <input
+            name="password"
+            type="password"
+            placeholder="Mot de passe (6 caractères min.)"
+            required
+          >
+
+          <select name="island">
+
+            <option value="">
+              Île
+            </option>
+
+            <option value="Ngazidja">
+              Ngazidja
+            </option>
+
+            <option value="Anjouan">
+              Anjouan
+            </option>
+
+            <option value="Mohéli">
+              Mohéli
+            </option>
+
+            <option value="Grande Comore">
+              Grande Comore
+            </option>
+
+            <option value="Autre">
+              Autre
+            </option>
+
+          </select>
+
+
+          <input
+            name="locality"
+            placeholder="Localité"
+          >
+
+
+          <input
+            name="role"
+            placeholder="Fonction / rôle"
+            value="Agent"
+          >
+
+
+          <button type="submit">
+            Créer mon compte
+          </button>
+
+        </form>
+
+        <p
+          id="registerMessage"
+          class="message"
+        ></p>
+
+      </div>
+
+    </section>
+
+
+    <!-- TABLEAU DE BORD -->
+
+    <section
+      id="dashboard"
+      hidden
+    >
+
+      <div class="dashboardHead">
+
+        <div>
+
+          <h2>
+            Tableau de bord
+          </h2>
+
+          <p id="welcome"></p>
+
+        </div>
+
+        <button
+          id="logoutBtn"
+          class="secondary"
+        >
+          Déconnexion
+        </button>
+
+      </div>
+
+
+      <!-- STATISTIQUES -->
+
+      <div class="stats">
+
+        <div class="stat">
+
+          <strong id="totalAgents">
+            0
+          </strong>
+
+          <span>
+            Agents
+          </span>
+
+        </div>
+
+
+        <div class="stat">
+
+          <strong id="activeAgents">
+            0
+          </strong>
+
+          <span>
+            Actifs
+          </span>
+
+        </div>
+
+
+        <div class="stat">
+
+          <strong id="islandCount">
+            0
+          </strong>
+
+          <span>
+            Zones
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="grid">
+
+
+        <!-- PROFIL -->
+
+        <div class="card">
+
+          <h3>
+            Mon profil
+          </h3>
+
+          <div id="profile"></div>
+
+        </div>
+
+
+        <!-- AJOUT AGENT -->
+
+        <div class="card">
+
+          <h3>
+            Ajouter un agent
+          </h3>
+
+          <form id="addAgentForm">
+
+            <input
+              name="name"
+              placeholder="Nom complet"
+              required
+            >
+
+            <input
+              name="phone"
+              placeholder="Téléphone"
+            >
+
+            <input
+              name="island"
+              placeholder="Île"
+            >
+
+            <input
+              name="locality"
+              placeholder="Localité"
+            >
+
+            <input
+              name="role"
+              placeholder="Rôle"
+              value="Agent"
+            >
+
+            <button type="submit">
+              Ajouter
+            </button>
+
+          </form>
+
+          <p
+            id="addMessage"
+            class="message"
+          ></p>
+
+        </div>
+
+      </div>
+
+
+      <!-- ANNUAIRE -->
+
+      <div class="card">
+
+        <h3>
+          Annuaire des agents
+        </h3>
+
+        <div
+          id="agentsList"
+          class="agents"
+        ></div>
+
+      </div>
+
+
+      <!-- MESSAGES -->
+
+      <div class="card">
+
+        <h3>
+          Communication du réseau
+        </h3>
+
+        <form
+          id="messageForm"
+          class="messageForm"
+        >
+
+          <textarea
+            name="text"
+            placeholder="Écrire un message aux agents..."
+            required
+          ></textarea>
+
+          <button type="submit">
+            Publier
+          </button>
+
+        </form>
+
+
+        <div id="messagesList"></div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+
+    NCT Agent Network —
+    plateforme de coordination
+
+  </footer>
+
+
+  <script src="app.js"></script>
+
+</body>
+            </html>
