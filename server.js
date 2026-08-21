@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const fs = require("fs");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,6 +24,26 @@ app.get("/api/status", (req, res) => {
   });
 });
 
+// API du réseau NCT Agent
+app.get("/api/network", (req, res) => {
+  const filePath = path.join(__dirname, "data", "network.json");
+
+  try {
+    const data = fs.readFileSync(filePath, "utf8");
+    const network = JSON.parse(data);
+
+    res.json(network);
+  } catch (error) {
+    console.error("Erreur lors du chargement de network.json :", error);
+
+    res.status(500).json({
+      success: false,
+      error: "Impossible de charger les données du réseau NCT Agent."
+    });
+  }
+});
+
+// Démarrage du serveur
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`NCT Agent Network lancé sur le port ${PORT}`);
 });
